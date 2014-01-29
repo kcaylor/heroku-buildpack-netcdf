@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-echo "       Installing HDF"
+echo "-----> Installing HDF"
 mkdir -p /app/vendor/hdf
 cd /app/vendor/hdf
 curl "http://pat-public.s3.amazonaws.com/hdf.tgz" -s -o - | tar zxvf -
 
-echo "       Installing NetCDF"
+echo "-----> Installing NetCDF"
 mkdir -p /app/vendor/netcdf
 cd /app/vendor/netcdf
 curl "http://pat-public.s3.amazonaws.com/netcdf.tgz" -s -o - | tar zxvf -
 
-echo "       Updating Environment Variables"
+echo "-----> Updating Environment Variables"
 export CPATH=$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include
 export CPPATH=$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include
 export LIBRARY_PATH=$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib

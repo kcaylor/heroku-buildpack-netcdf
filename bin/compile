@@ -11,9 +11,17 @@ cd /app/vendor/netcdf
 curl "http://pat-public.s3.amazonaws.com/netcdf.tgz" -s -o - | tar zxvf -
 
 echo "-----> Updating Environment Variables"
-export CPATH=$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include
-export CPPATH=$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include
-export LIBRARY_PATH=$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib
-export BUNDLE_BUILD__RUBY-NETCDF="--with-netcdf-dir=/app/vendor/netcdf"
+cat <<EOF > $BUILD_DIR/build_env.sh
+export CPATH="\$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
+export CPPATH="\$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
+export LIBRARY_PATH="\$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib"
+EOF
+
+if [ ! -f /app/.bundle/config ]
+then
+  echo "---" > /app/.bundle/config
+fi
+
+echo "BUNDLE_BUILD__RUBY-NETCDF: --with-netcdf-dir=/app/vendor/netcdf" >> /app/.bundle/config
 
 echo 0

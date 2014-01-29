@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-echo $1
-echo $2
-
 echo "-----> Installing HDF"
-mkdir -p $1/vendor/hdf
-cd $1/vendor/hdf
+mkdir -p /app/vendor/hdf
+cd /app/vendor/hdf
 curl "http://pat-public.s3.amazonaws.com/hdf.tgz" -s -o - | tar zxf -
 
 echo "-----> Installing NetCDF"
-mkdir -p $1/vendor/netcdf
-cd $1/vendor/netcdf
+mkdir -p /app/vendor/netcdf
+cd /app/vendor/netcdf
 curl "http://pat-public.s3.amazonaws.com/netcdf.tgz" -s -o - | tar zxf -
 
 echo "-----> Updating Environment Variables"
@@ -20,6 +17,7 @@ export CPPATH="\$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export LIBRARY_PATH="\$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib"
 EOF
 
+mkdir -p $1/.bundle
 if [ ! -f $1/.bundle/config ]
 then
   echo "---" > $1/.bundle/config

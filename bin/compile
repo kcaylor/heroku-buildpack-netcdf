@@ -25,4 +25,4 @@ fi
 
 echo "BUNDLE_BUILD__RUBY-NETCDF: --with-netcdf-dir=/app/vendor/netcdf" >> $1/.bundle/config
 
-echo 0
+exit 0

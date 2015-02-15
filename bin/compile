@@ -15,6 +15,7 @@ cat <<EOF > export
 export CPATH="\$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export CPPATH="\$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export LIBRARY_PATH="\$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib"
+echo "Importing CPATH, CCPATH and LIBRARY_PATH"
 EOF
 
 mkdir -p $1/.bundle

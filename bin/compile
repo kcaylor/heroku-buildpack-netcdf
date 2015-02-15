@@ -11,7 +11,7 @@ cd /app/vendor/netcdf
 curl "http://pat-public.s3.amazonaws.com/netcdf.tgz" -s -o - | tar zxf -
 
 echo "-----> Updating Environment Variables"
-cat <<EOF > export
+cat <<EOF > $1/export
 export CPATH="\$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export CPPATH="\$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export LIBRARY_PATH="\$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib"

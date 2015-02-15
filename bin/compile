@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-echo "-----> Running within $PWD"
+PACK_DIR=$PWD
+BUILD_DIR=$1
+CACHE_DIR=$2
+
 echo "-----> Installing HDF"
 mkdir -p /app/vendor/hdf
 cd /app/vendor/hdf
@@ -11,20 +14,20 @@ mkdir -p /app/vendor/netcdf
 cd /app/vendor/netcdf
 curl "http://pat-public.s3.amazonaws.com/netcdf.tgz" -s -o - | tar zxf -
 
-echo "-----> Updating Environment Variables to $PWD/export"
-cat <<EOF > $PWD/export
+echo "-----> Updating Environment Variables to $PACK_DIR/export"
+cat <<EOF > $PACK_DIR/export
 export CPATH="\$CPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export CPPATH="\$CPPATH:/app/vendor/hdf/include:/app/vendor/netcdf/include"
 export LIBRARY_PATH="\$LIBRARY_PATH:/app/vendor/hdf/lib:/app/vendor/netcdf/lib"
 echo "Importing CPATH, CCPATH and LIBRARY_PATH"
 EOF
 
-mkdir -p $1/.bundle
-if [ ! -f $1/.bundle/config ]
+mkdir -p $BUILD_DIR/.bundle
+if [ ! -f $BUILD_DIR/.bundle/config ]
 then
-  echo "---" > $1/.bundle/config
+  echo "---" > $BUILD_DIR/.bundle/config
 fi
 
-echo "BUNDLE_BUILD__RUBY-NETCDF: --with-netcdf-dir=/app/vendor/netcdf" >> $1/.bundle/config
+echo "BUNDLE_BUILD__RUBY-NETCDF: --with-netcdf-dir=/app/vendor/netcdf" >> $BUILD_DIR/.bundle/config
 
 exit 0

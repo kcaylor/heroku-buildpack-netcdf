@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo "-----> Running within $PWD"
 echo "-----> Installing HDF"
 mkdir -p /app/vendor/hdf
 cd /app/vendor/hdf
